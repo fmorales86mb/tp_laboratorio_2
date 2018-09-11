@@ -1,0 +1,91 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Entidades;
+
+namespace MiCalculadora
+{
+    /* Consultas:
+     
+     * Uso de atributos de la clase o creo objetos en los métodos 
+     * Limpiar en el Constructor
+    */
+    public partial class LaCalculadora: Form
+    {
+        private Calculadora Calc;
+        private Numero Nro1;
+        private Numero Nro2;
+
+        public LaCalculadora()
+        {
+            InitializeComponent();
+            Limpiar();
+            Calc = new Calculadora();
+        }
+        
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnConvertirABinario_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnConvertirADecimal_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            Limpiar();
+        }
+
+        private void btnOperar_Click(object sender, EventArgs e)
+        {
+            string resultado = (Operar(txtNumero1.Text, txtNumero2.Text, cmbOperador.SelectedText)).ToString();
+            lblResultado.Text = resultado;
+        }
+
+        private void frmCalculadora_FormClosing(object sender, FormClosingEventArgs e)
+        {            
+            if (MessageBox.Show("¿Confirma el cierre de la aplicación?",
+                "Confirmación", MessageBoxButtons.OKCancel, 
+                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) 
+                == DialogResult.Cancel) e.Cancel=true;
+        }
+
+        /// <summary>
+        /// Inicializa los valores de los controles del form.
+        /// </summary>
+        private void Limpiar()
+        {
+            txtNumero1.Text = "0";
+            txtNumero2.Text = "0";
+            lblResultado.Text = "0";
+            cmbOperador.SelectedIndex = -1;
+        }
+
+        /// <summary>
+        /// Realiza la operación y devuelve el resultado.
+        /// </summary>
+        /// <param name="numero1">Valor del txtNumero1</param>
+        /// <param name="numero2">Valor del txtNumero2</param>
+        /// <param name="operador">Item seleccionado en el ComboBox</param>
+        /// <returns>Resultado de la operación</returns>
+        private double Operar (string numero1, string numero2, string operador)
+        {
+            Nro1 = new Numero(numero1);
+            Nro2 = new Numero(numero2);
+            return Calc.Operar(Nro1, Nro2, operador);
+        }
+    }
+}

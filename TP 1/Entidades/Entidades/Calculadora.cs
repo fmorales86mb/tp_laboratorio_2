@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Calculadora
+
+    /* Consultas:
+     
+     * Esta podría ser estática.
+     * Método ValidarOperador. Ver si hace falta el if o si el swich ejecuta defout si el string es null o empty
+     * 
+    */
+
+    public class Calculadora    
     {
         /// <summary>
         /// Valida y realiza la operación pedida entre ambos Numeros.
@@ -48,7 +56,6 @@ namespace Entidades
         /// <returns>Si el parámetro es válido lo retorna, Caso contrario retornará "+".</returns>
         private static string ValidarOperador(string operador)
         {
-            // Ver si el switch con un string null o empty toma el valor default.
             string operadorValidado = "+";
             if (!string.IsNullOrEmpty(operador))
             {
@@ -73,7 +80,5 @@ namespace Entidades
             }
             return operadorValidado;
         }
-
-
     }
 }

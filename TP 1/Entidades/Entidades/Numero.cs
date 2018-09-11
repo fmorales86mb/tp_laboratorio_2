@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
+    /* Consultas:
+     
+     * Casteo implícito de Numero a double. 
+    */
     public class Numero
     {
         private double numero;
