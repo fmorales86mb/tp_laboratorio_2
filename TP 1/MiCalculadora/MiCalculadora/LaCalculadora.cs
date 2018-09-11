@@ -15,6 +15,7 @@ namespace MiCalculadora
      
      * Uso de atributos de la clase o creo objetos en los métodos 
      * Limpiar en el Constructor
+     * El combo como dropdownlist, es decir que no permite ingresar valores distintos a los items cargados.
     */
     public partial class LaCalculadora: Form
     {
@@ -51,7 +52,7 @@ namespace MiCalculadora
 
         private void btnOperar_Click(object sender, EventArgs e)
         {
-            string resultado = (Operar(txtNumero1.Text, txtNumero2.Text, cmbOperador.SelectedText)).ToString();
+            string resultado = (Operar(txtNumero1.Text, txtNumero2.Text, cmbOperador.SelectedItem.ToString())).ToString();
             lblResultado.Text = resultado;
         }
 
