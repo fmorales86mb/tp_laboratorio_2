@@ -9,7 +9,7 @@ namespace Entidades
 
     /* Consultas:
      
-     * Esta podría ser estática.
+     * Esta podría ser estática. Hacer lo que dice el enunciado. No es estático pero debería serlo.
      * Método ValidarOperador. Ver si hace falta el if o si el swich ejecuta defout si el string es null o empty
      * 
     */

@@ -13,9 +13,9 @@ namespace MiCalculadora
 {
     /* Consultas:
      
-     * Uso de atributos de la clase o creo objetos en los métodos 
-     * Limpiar en el Constructor
-     * El combo como dropdownlist, es decir que no permite ingresar valores distintos a los items cargados.
+     * Uso de atributos de la clase o creo objetos en los métodos. Atributos de clase. 
+     * Limpiar en el Constructor ok
+     * El combo como dropdownlist, es decir que no permite ingresar valores distintos a los items cargados. No es necesario. 
     */
     public partial class LaCalculadora: Form
     {
