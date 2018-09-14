@@ -5,16 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Entidades
-{
-
-    /* Consultas:
-     
-     * Esta podría ser estática. Hacer lo que dice el enunciado. No es estático pero debería serlo.
-     * Método ValidarOperador. Ver si hace falta el if o si el swich ejecuta defout si el string es null o empty
-     * 
-    */
-
-    public class Calculadora    
+{    
+    public class Calculadora
     {
         /// <summary>
         /// Valida y realiza la operación pedida entre ambos Numeros.
@@ -23,7 +15,7 @@ namespace Entidades
         /// <param name="nro2">Segundo Numero.</param>
         /// <param name="operador">Parámetro que indica la operación a realizar. En caso de invalidez se asigna "+".</param>
         /// <returns>Retorna el valor del resultado de la operación.</returns>
-        public double Operar (Numero nro1, Numero nro2, string operador)
+        public double Operar(Numero nro1, Numero nro2, string operador)
         {
             double resultado;
             string operadorValidado = ValidarOperador(operador);
@@ -56,28 +48,27 @@ namespace Entidades
         /// <returns>Si el parámetro es válido lo retorna, Caso contrario retornará "+".</returns>
         private static string ValidarOperador(string operador)
         {
-            string operadorValidado = "+";
-            if (!string.IsNullOrEmpty(operador))
+            string operadorValidado;
+
+            switch (operador) // con null o "" toma default.
             {
-                switch (operador)
-                {
-                    case "+":
-                        operadorValidado = "+";
-                        break;
-                    case "-":
-                        operadorValidado = "-";
-                        break;
-                    case "*":
-                        operadorValidado = "*";
-                        break;
-                    case "/":
-                        operadorValidado = "/";
-                        break;
-                    default:
-                        operadorValidado = "+";
-                        break;
-                }
+                case "+":
+                    operadorValidado = "+";
+                    break;
+                case "-":
+                    operadorValidado = "-";
+                    break;
+                case "*":
+                    operadorValidado = "*";
+                    break;
+                case "/":
+                    operadorValidado = "/";
+                    break;
+                default:
+                    operadorValidado = "+";
+                    break;
             }
+
             return operadorValidado;
         }
     }

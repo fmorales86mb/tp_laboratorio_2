@@ -2,14 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Entidades
 {
-    /* Consultas:
-     
-     * Casteo implícito de Numero a double. 
-    */
     public class Numero
     {
         private double numero;
@@ -43,7 +38,7 @@ namespace Entidades
         private double ValidarNumero (string strNumero)
         {
             double valor = 0;
-            if (!string.IsNullOrEmpty(strNumero))
+            if (!string.IsNullOrEmpty(strNumero) && !strNumero.Contains("."))
             {
                 double.TryParse(strNumero, out valor);
             } 
@@ -55,9 +50,53 @@ namespace Entidades
         /// </summary>
         /// <param name="binario"></param>
         /// <returns>Si es posible retorna el valor en decimal con formato string. En caso contrario retorna "Valor inválido". </returns>
-        public string BinarioDecimal(string binario)
+        public string BinarioDecimal(string valor)
         {
-            return "";
+            int acumuladorEntero = 0;
+            bool esNegativo = valor.StartsWith("-");
+            double acumuladorFraccional = 0;
+            int nro;
+            int factorProducto;
+            int j;
+
+            string[] enteroFraccional = valor.Split(',');
+            j = enteroFraccional[0].Length - 1;
+
+            // Parte entera.
+            for (int i = 0; i < enteroFraccional[0].Length; i++, j--)
+            {
+                // voy de derecha a izquierda. El factor arranca en 1 con i = 0
+                factorProducto = (int)Math.Pow(2, i);
+
+                // La toma de dígitos es de derecha a izquierda. con j igual al último índice del string.
+                if (int.TryParse((enteroFraccional[0][j]).ToString(), out nro))
+                {
+                    acumuladorEntero += nro * factorProducto;
+                }
+            }
+
+            // Parte Fraccional.
+            if (enteroFraccional.GetLength(0) == 2) //Chequeo que exista el índice 1.
+            {
+                for (int i = 0; i < enteroFraccional[1].Length; i++)
+                {
+                    factorProducto = (int)Math.Pow(2, i + 1);
+
+                    if (int.TryParse(enteroFraccional[1][i].ToString(), out nro))
+                    {
+                        acumuladorFraccional += (double)nro / factorProducto;
+                    }
+                    else
+                    {
+                        acumuladorFraccional = 0;
+                        break;
+                    }
+                }
+            }
+
+            double resultado = esNegativo ? (acumuladorEntero + acumuladorFraccional) * (-1) : 
+                acumuladorEntero + acumuladorFraccional;
+            return resultado.ToString();
         }
 
         /// <summary>
@@ -67,7 +106,14 @@ namespace Entidades
         /// <returns>Valor en formato string. Si no es posible la conversión retorna "Valor inválido".</returns>
         public string DecimalBinario(string numero)
         {
-            return "";
+            double nro;
+            string retorno;
+
+            if (double.TryParse(numero, out nro))            
+                retorno = this.DecimalBinario(nro);           
+            else retorno = ("Valor inválido");
+
+            return retorno;
         }
 
         /// <summary>
@@ -75,16 +121,47 @@ namespace Entidades
         /// </summary>
         /// <param name="numero"></param>
         /// <returns>Valor en formato string. Si no es posible la conversión retorna "Valor inválido".</returns>
-        public string DecimalBinario(double numero)
+        public string DecimalBinario(double valor)
         {
-            return "";
-        }
+            string nroBinario = string.Empty;
+            bool esNegativo = valor < 0;
+            if (esNegativo) valor *= -1;
+            double nroAux;
+            int enteroAux;
+            int valEntero = (int)valor;
+            double valFrac = valor - valEntero;
 
-        // ver si corresponde 
-        //public static implicit operator double(Numero nro)
-        //{
-        //    return nro.numero;
-        //}
+            // Parte entera.  
+            if (valEntero == 0) nroBinario = "0";
+            else
+            {
+                while (valEntero > 0)
+                {
+                    if (valEntero % 2 == 0) nroBinario = "0" + nroBinario; //ingreso los nros como pila.
+                    else nroBinario = "1" + nroBinario;
+                    valEntero = (int)(valEntero / 2); // tomo la parte entera                
+                }
+            }
+
+            // Parte fraccional            
+            if (valFrac != 0)
+            {
+                nroBinario += ","; // ingreso como cola
+
+                for (int i = 0; i < 10; i++)
+                {
+                    nroAux = valFrac * 2;
+                    enteroAux = (int)nroAux;
+                    valFrac = nroAux - enteroAux;
+
+                    nroBinario += enteroAux.ToString();
+                }
+                nroBinario = nroBinario.TrimEnd('0'); //quito los ceros sobrantes
+            }
+
+            if (esNegativo) nroBinario = "-" + nroBinario;
+            return nroBinario;            
+        }
 
         public static double operator -(Numero nro1, Numero nro2)
         {

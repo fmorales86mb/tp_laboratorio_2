@@ -22,12 +22,14 @@ namespace MiCalculadora
         private Calculadora Calc;
         private Numero Nro1;
         private Numero Nro2;
+        private bool EsDecimal;
+        private Numero NumeroObj = new Numero();
 
         public LaCalculadora()
         {
             InitializeComponent();
             Limpiar();
-            Calc = new Calculadora();
+            Calc = new Calculadora();            
         }
         
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -37,12 +39,20 @@ namespace MiCalculadora
 
         private void btnConvertirABinario_Click(object sender, EventArgs e)
         {
-
+            if (EsDecimal)
+            {
+                lblResultado.Text = NumeroObj.DecimalBinario(lblResultado.Text);
+                EsDecimal = false;
+            }
         }
 
         private void btnConvertirADecimal_Click(object sender, EventArgs e)
         {
-
+            if (!EsDecimal)
+            {
+                lblResultado.Text = NumeroObj.BinarioDecimal(lblResultado.Text);
+                EsDecimal = true;
+            }
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -51,9 +61,10 @@ namespace MiCalculadora
         }
 
         private void btnOperar_Click(object sender, EventArgs e)
-        {
+        {            
             string resultado = (Operar(txtNumero1.Text, txtNumero2.Text, cmbOperador.SelectedItem.ToString())).ToString();
             lblResultado.Text = resultado;
+            EsDecimal = true;
         }
 
         private void frmCalculadora_FormClosing(object sender, FormClosingEventArgs e)
@@ -72,7 +83,8 @@ namespace MiCalculadora
             txtNumero1.Text = "0";
             txtNumero2.Text = "0";
             lblResultado.Text = "0";
-            cmbOperador.SelectedIndex = -1;
+            cmbOperador.SelectedIndex = 0;
+            EsDecimal = true;
         }
 
         /// <summary>
