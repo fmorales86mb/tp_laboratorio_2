@@ -159,7 +159,7 @@
             this.MinimizeBox = false;
             this.Name = "LaCalculadora";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = " Calculadora de Federico Morales del curso 2ºA";
+            this.Text = " Calculadora de Federico Morales del curso 2ºD";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCalculadora_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();

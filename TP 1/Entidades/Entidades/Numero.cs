@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Entidades
 {
@@ -31,7 +32,7 @@ namespace Entidades
         }
 
         /// <summary>
-        ///  Comprueba que el valor recibido sea numérico.
+        ///  Comprueba que el valor recibido sea numérico y no tenga '.'
         /// </summary>
         /// <param name="strNumero"></param>
         /// <returns>Valor en formato double. Si el parámetro pasado es inválido retorna cero.</returns>
@@ -53,50 +54,31 @@ namespace Entidades
         public string BinarioDecimal(string valor)
         {
             int acumuladorEntero = 0;
-            bool esNegativo = valor.StartsWith("-");
+            bool esNegativo = valor.StartsWith("-");            
             double acumuladorFraccional = 0;
-            int nro;
-            int factorProducto;
-            int j;
+            string valorRetorno;
 
-            string[] enteroFraccional = valor.Split(',');
-            j = enteroFraccional[0].Length - 1;
-
-            // Parte entera.
-            for (int i = 0; i < enteroFraccional[0].Length; i++, j--)
+            // valido string
+            if (ValidacionStrBinario(valor))
             {
-                // voy de derecha a izquierda. El factor arranca en 1 con i = 0
-                factorProducto = (int)Math.Pow(2, i);
+                string[] enteroFraccional = valor.Split(',');
 
-                // La toma de dígitos es de derecha a izquierda. con j igual al último índice del string.
-                if (int.TryParse((enteroFraccional[0][j]).ToString(), out nro))
+                // Parte entera.
+                acumuladorEntero = ParteEnteraBinariaADecimal(enteroFraccional[0]);
+
+                // Parte Fraccional.
+                if (enteroFraccional.GetLength(0) == 2) //Chequeo que exista el índice 1.
                 {
-                    acumuladorEntero += nro * factorProducto;
+                    acumuladorFraccional = ParteFraccionalBinariaADecimal(enteroFraccional[1]);
                 }
+
+                double resultado = esNegativo ? (acumuladorEntero + acumuladorFraccional) * (-1) :
+                    acumuladorEntero + acumuladorFraccional;
+                valorRetorno = resultado.ToString();
             }
+            else valorRetorno = "Valor inválido";
 
-            // Parte Fraccional.
-            if (enteroFraccional.GetLength(0) == 2) //Chequeo que exista el índice 1.
-            {
-                for (int i = 0; i < enteroFraccional[1].Length; i++)
-                {
-                    factorProducto = (int)Math.Pow(2, i + 1);
-
-                    if (int.TryParse(enteroFraccional[1][i].ToString(), out nro))
-                    {
-                        acumuladorFraccional += (double)nro / factorProducto;
-                    }
-                    else
-                    {
-                        acumuladorFraccional = 0;
-                        break;
-                    }
-                }
-            }
-
-            double resultado = esNegativo ? (acumuladorEntero + acumuladorFraccional) * (-1) : 
-                acumuladorEntero + acumuladorFraccional;
-            return resultado.ToString();
+            return valorRetorno;
         }
 
         /// <summary>
@@ -183,6 +165,61 @@ namespace Entidades
             double resultado = 0;
             if (nro2.numero != 0) resultado = nro1.numero / nro2.numero;
             return resultado;
+        }
+
+        /// <summary>
+        /// Valida que el str pasado sea binario.
+        /// </summary>
+        /// <param name="valor">Parámetro a evaluar.</param>
+        /// <returns>True si equivale a binario, caso contrario False.</returns>
+        private bool ValidacionStrBinario (string valor)
+        {
+            Regex expresión = new Regex(@"^\-*[10]+\,?[10]*$");
+            return expresión.IsMatch(valor);
+        }
+
+        private int ParteEnteraBinariaADecimal (string parteEntera)
+        {
+            int factorProducto, nro;
+            int j = parteEntera.Length - 1;
+            int acumuladorEntero = 0;
+            for (int i = 0; i < parteEntera.Length; i++, j--)
+            {
+                // voy de derecha a izquierda. El factor arranca en 1 con i = 0
+                factorProducto = (int)Math.Pow(2, i);
+
+                // La toma de dígitos es de derecha a izquierda. con j igual al último índice del string.
+                if (int.TryParse((parteEntera[j]).ToString(), out nro))
+                {
+                    acumuladorEntero += nro * factorProducto;
+                }
+            }
+
+            return acumuladorEntero;
+        }
+
+        private double ParteFraccionalBinariaADecimal(string parteFraccional)
+        {
+            double acumuladorFraccional = 0;
+            int factorProducto;
+            int nro;
+            
+            for (int i = 0; i < parteFraccional.Length; i++)
+            {
+                factorProducto = (int)Math.Pow(2, i + 1);
+
+                if (int.TryParse(parteFraccional[i].ToString(), out nro))
+                {
+                    acumuladorFraccional += (double)nro / factorProducto;
+                }
+                else
+                {
+                    acumuladorFraccional = 0;
+                    break;
+                }
+            }
+            
+            return acumuladorFraccional;
         }
     }
 }
