@@ -10,6 +10,8 @@ namespace Entidades
     {
         private double numero;
 
+        public string SetNumero { set => numero = ValidarNumero(value); }
+
         public Numero() : this(0) { }        
 
         public Numero(double numero)
@@ -19,17 +21,17 @@ namespace Entidades
 
         public Numero(string strNumero)
         {
-            SetNumero(strNumero);
+            SetNumero = strNumero;
         }
 
         /// <summary>
         /// Asigna un valor al atributo numero, previa validación.
         /// </summary>
         /// <param name="strNumero"></param>
-        public void SetNumero(string strNumero)
-        {
-            this.numero = ValidarNumero(strNumero);
-        }
+        //public void SetNumero(string strNumero)
+        //{
+        //    this.numero = ValidarNumero(strNumero);
+        //}
 
         /// <summary>
         ///  Comprueba que el valor recibido sea numérico y no tenga '.'
