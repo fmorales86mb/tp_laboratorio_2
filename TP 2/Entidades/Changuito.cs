@@ -60,17 +60,20 @@ namespace Entidades_2018
             sb.AppendFormat("Tenemos {0} lugares ocupados de un total de {1} disponibles", c.productos.Count, c.espacioDisponible);
             sb.AppendLine("");
             foreach (Producto v in c.productos)
-            {
+            {                
                 switch (tipo)
                 {
                     case ETipo.Snacks:
-                        sb.AppendLine(v.Mostrar());
+                        if (v is Snacks)
+                            sb.AppendLine(v.Mostrar());
                         break;
                     case ETipo.Dulce:
-                        sb.AppendLine(v.Mostrar());
+                        if (v is Dulce)
+                            sb.AppendLine(v.Mostrar());
                         break;
                     case ETipo.Leche:
-                        sb.AppendLine(v.Mostrar());
+                        if(v is Leche)
+                            sb.AppendLine(v.Mostrar());
                         break;
                     default:
                         sb.AppendLine(v.Mostrar());
