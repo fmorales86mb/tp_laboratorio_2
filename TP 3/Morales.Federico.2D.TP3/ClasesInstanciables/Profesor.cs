@@ -97,5 +97,33 @@ namespace ClasesInstanciables
 
             return sb.ToString();
         }
+
+        /// <summary>
+        /// Un Profesor es igual a un EClase si da esa clase.
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public static bool operator==(Profesor p, Universidad.EClases c)
+        {
+            bool valRetorno = false;
+
+            foreach(Universidad.EClases clase in p.clasesDelDia)
+            {
+                if (clase == c)
+                {
+                    valRetorno = true;
+                    break;
+                }
+            }
+
+            return valRetorno;
+        }
+
+        public static bool operator !=(Profesor p, Universidad.EClases c)
+        {
+            return !(p == c);
+        }
+
     }
 }
