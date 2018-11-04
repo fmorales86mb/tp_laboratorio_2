@@ -116,7 +116,7 @@ namespace ClasesAbstractas
         /// <param name="nacionalidad"></param>
         /// <param name="dato">DNI a validar</param>
         /// <returns>Dni validado</returns>
-        protected int ValidarDni(ENacionalidad nacionalidad, int dato)
+        private int ValidarDni(ENacionalidad nacionalidad, int dato)
         {
             int valorRetorno = 0;
 
@@ -155,7 +155,7 @@ namespace ClasesAbstractas
         /// <param name="nacionalidad"></param>
         /// <param name="dato"></param>
         /// <returns>Dni validado.</returns>
-        protected int ValidarDni(ENacionalidad nacionalidad, string dato)
+        private int ValidarDni(ENacionalidad nacionalidad, string dato)
         {
             string patternDniArgentino = @"^\d{1,8}$";
             string patternDniExtranjero = @"^\d{8}$";
@@ -199,7 +199,7 @@ namespace ClasesAbstractas
         /// </summary>
         /// <param name="dato">Nombre o apellido a validar</param>
         /// <returns>Si el dato es válido lo retorna. Caso contrario retorna string.Empty</returns>
-        protected string ValidarNombreApellido(string dato)
+        private string ValidarNombreApellido(string dato)
         {
             string valorRetorno = string.Empty;
             string patternName = @"^[A-Za-z][a-z]+$";
