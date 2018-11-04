@@ -18,7 +18,18 @@ using System.Threading.Tasks;
 
 namespace ClasesInstanciables
 {
-    class Universidad
+    public class Universidad
     {
+        private List<Alumno> alumnos;
+        private List<Jornada> jornada;
+        private List<Profesor> Profesores;
+
+        enum EClases
+        {
+            Programacion,
+            Laboratorio,
+            Legislacion,
+            SPD
+        }
     }
 }
