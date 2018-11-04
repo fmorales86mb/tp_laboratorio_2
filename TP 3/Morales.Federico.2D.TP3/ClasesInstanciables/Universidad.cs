@@ -24,7 +24,7 @@ namespace ClasesInstanciables
         private List<Jornada> jornada;
         private List<Profesor> Profesores;
 
-        enum EClases
+        public enum EClases
         {
             Programacion,
             Laboratorio,

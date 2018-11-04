@@ -16,17 +16,21 @@ namespace ClasesAbstractas
 {
     public abstract class Universitario : Persona
     {
+        // Atributo
         private int legajo;
 
+        // Constructores
         public Universitario()
         {
         }
+
         public Universitario(int legajo, string nombre, string apellido, int dni, ENacionalidad nacionalidad) 
             : base(nombre, apellido, dni, nacionalidad)
         {
             this.legajo = legajo;
         }
 
+        // Métodos
         /// <summary>
         /// Retorna todos los datos del Universitario.
         /// </summary>
@@ -39,6 +43,7 @@ namespace ClasesAbstractas
 
             return sb.ToString();
         }
+
         protected abstract string ParticiparEnClase();
 
         /// <summary>
@@ -58,10 +63,12 @@ namespace ClasesAbstractas
 
             return valorRetorno;
         }
+
         public static bool operator !=(Universitario pg1, Universitario pg2)
         {
             return !(pg1 == pg2);
         }
+
         /// <summary>
         /// 
         /// </summary>

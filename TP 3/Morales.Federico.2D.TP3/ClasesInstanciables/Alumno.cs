@@ -18,18 +18,22 @@ namespace ClasesInstanciables
 {
     public sealed class Alumno : Universitario
     {
+        // Atributos
         private Universidad.EClases claseQueToma;
         private EEstadoCuenta estadoCuenta;
 
+        // Constructores
         public Alumno()
         {            
         }
+
         public Alumno(int id, string nombre, string apellido, int dni, ENacionalidad nacionalidad, 
             Universidad.EClases claseQueToma) 
             : base(id, nombre, apellido, dni, nacionalidad)
         {
             this.claseQueToma = claseQueToma;
         }
+
         public Alumno(int id, string nombre, string apellido, int dni, ENacionalidad nacionalidad, 
             Universidad.EClases claseQueToma, EEstadoCuenta estadoCuenta) 
             : this(id, nombre, apellido, dni, nacionalidad, claseQueToma)
@@ -37,7 +41,7 @@ namespace ClasesInstanciables
             this.estadoCuenta = estadoCuenta;
         }
 
-
+        //Métodos
         /// <summary>
         /// Devuelve todos los datos del Alumno.
         /// </summary>
@@ -50,6 +54,7 @@ namespace ClasesInstanciables
 
             return sb.ToString();
         }
+
         /// <summary>
         /// Retorna la cadena "TOMA CLASE DE: " junto al nombre de la clase que toma.
         /// </summary>
@@ -58,6 +63,7 @@ namespace ClasesInstanciables
         {
             return ("TOMA CLASES DE: " + this.claseQueToma.ToString());
         }
+
         /// <summary>
         /// Un Alumno es igual a un EClase si toma esa clase y su estado de cuenta no es Deudor.
         /// </summary>
@@ -68,6 +74,7 @@ namespace ClasesInstanciables
         {
             return (a.claseQueToma == clase && a.estadoCuenta != EEstadoCuenta.Deudor);
         }
+
         /// <summary>
         /// Un Alumno es distinto a un EClase sólo si no toma esa clase.
         /// </summary>
@@ -78,6 +85,7 @@ namespace ClasesInstanciables
         {
             return (a.claseQueToma != clase);
         }
+
         /// <summary>
         /// Retorna los datos del Alumno.
         /// </summary>

@@ -19,11 +19,13 @@ namespace ClasesAbstractas
 {
     public abstract class Persona
     {
+        // Atributos
         private string apellido;
         private int dni;
         private ENacionalidad nacionalidad;
         private string nombre;
 
+        // Propiedades
         public string Apellido
         {
             get
@@ -35,6 +37,7 @@ namespace ClasesAbstractas
                 this.apellido = this.ValidarNombreApellido(value);
             }
         }
+
         public int Dni
         {
             get
@@ -46,6 +49,7 @@ namespace ClasesAbstractas
                 this.dni = this.ValidarDni(this.Nacionalidad, value);
             }
         }
+
         public ENacionalidad Nacionalidad
         {
             get
@@ -57,6 +61,7 @@ namespace ClasesAbstractas
                 this.nacionalidad = value;
             }
         }
+
         public string Nombre
         {
             get
@@ -68,6 +73,7 @@ namespace ClasesAbstractas
                 this.nombre = this.ValidarNombreApellido(value);
             }
         }
+
         public string StringToDNI
         {
             set
@@ -76,24 +82,29 @@ namespace ClasesAbstractas
             }
         }
 
+        // Constructores
         public Persona() { }
+
         public Persona(string nombre, string apellido, ENacionalidad nacionalidad)
         {
             this.Nombre = nombre;
             this.Apellido = apellido;
             this.Nacionalidad = nacionalidad;
         }
+
         public Persona(string nombre, string apellido, int dni, ENacionalidad nacionalidad)
             : this(nombre, apellido, nacionalidad)
         {
             this.Dni = dni;
         }
+
         public Persona(string nombre, string apellido, string dni, ENacionalidad nacionalidad)
             :this(nombre, apellido, nacionalidad)
         {
             this.StringToDNI = dni;
         }
 
+        // Métodos
         /// <summary>
         /// Retorna los datos de la Persona.
         /// </summary>
@@ -108,6 +119,7 @@ namespace ClasesAbstractas
             
             return sb.ToString();
         }
+
         /// <summary>
         /// Se valida que el DNI sea correcto, teniendo en cuenta su nacionalidad. 
         /// Argentino entre 1 y 89999999 y Extranjero entre 90000000 y 99999999. 
@@ -148,6 +160,7 @@ namespace ClasesAbstractas
 
             return valorRetorno;
         }
+
         /// <summary>
         /// Se valida que el DNI sea correcto, teniendo en cuenta su nacionalidad.
         /// Si el DNI presenta un error de formato (más caracteres de los permitidos, letras, etc.) se lanza DniInvalidoException.
@@ -193,6 +206,7 @@ namespace ClasesAbstractas
  
             return valorRetorno;
         }
+
         /// <summary>
         /// Valida que el nombre o apellido ingresado sea de sólo caracteres entre a-z y tenga al menos dos, 
         /// permitiendo mayúscula en el primer caracter.
