@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Excepciones;
+using Archivos;
 
 //Clase Jornada:
 // Atributos Profesor, Clase y Alumnos que toman dicha clase.
@@ -16,6 +17,7 @@ using Excepciones;
 
 namespace ClasesInstanciables
 {
+    [Serializable]
     public class Jornada
     {
         // Atributos    
@@ -72,21 +74,48 @@ namespace ClasesInstanciables
             this.Clase = clase;
             this.Instructor = instructor;
         }
-        
+
         // Métodos
-        public bool Guardar(Jornada jornada)
+        /// <summary>
+        /// Guarda los datos de la Jornada en un archivo de texto.        
+        /// </summary>
+        /// <param name="jornada"></param>
+        /// <returns></returns>
+        public static bool Guardar(Jornada jornada)
         {
-            return true;
+            Texto writer = new Texto();
+            return writer.Guardar("archivoJornada.txt", jornada.ToString());
         }
 
-        public string Leer()
+        /// <summary>
+        /// Retorna los datos de la Jornada como texto.
+        /// </summary>
+        /// <returns></returns>
+        public static string Leer()
         {
-            return "";
+            string datos;
+            Texto writer = new Texto();
+            writer.Leer("archivoJornada.txt", out datos);
+            return datos;
         }
 
+        /// <summary>
+        /// Muestra todos los datos de la Jornada.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
-            return base.ToString();
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("JORNADA:");
+            sb.AppendFormat("CLASE DE {0} POR {1}", this.Clase.ToString(), this.Instructor.ToString());
+            sb.AppendLine("ALUMNOS:");
+            foreach (Alumno a in this.Alumnos)
+            {
+                sb.AppendLine(a.ToString());
+            }
+
+            return sb.ToString();
         }
 
         /// <summary>

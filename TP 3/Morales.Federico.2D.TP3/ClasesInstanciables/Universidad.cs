@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Excepciones;
+using Archivos;
 
 //Clase Universidad:
 // Atributos Alumnos(lista de inscriptos), Profesores(lista de quienes pueden dar clases) y Jornadas.
@@ -22,6 +23,7 @@ using Excepciones;
 
 namespace ClasesInstanciables
 {
+    [Serializable]
     public class Universidad
     {
         // Atributos
@@ -93,9 +95,27 @@ namespace ClasesInstanciables
         }
 
         // Métodos
-        public bool Guardar (Universidad uni)
+        /// <summary>
+        /// Serializa los datos del Universidad en un XML, incluyendo todos los datos de sus Profesores, Alumnos y Jornadas.
+        /// </summary>
+        /// <param name="uni"></param>
+        /// <returns>True si se serializó correctamente.</returns>
+        public static bool Guardar (Universidad uni)
         {
-            return false;
+            Xml<Universidad> serializador = new Xml<Universidad>();
+            return serializador.Guardar("archivoUni", uni);
+        }
+
+        /// <summary>
+        /// Retorna un Universidad con todos los datos previamente serializados.
+        /// </summary>
+        /// <param name="uni"></param>
+        /// <returns></returns>
+        public static Universidad Leer ()
+        {
+            Xml<Universidad> serializador = new Xml<Universidad>();
+            serializador.Leer("archivoUni", out Universidad uni);
+            return uni;
         }
 
         /// <summary>
