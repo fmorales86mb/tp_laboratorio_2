@@ -182,7 +182,7 @@ namespace EntidadesAbstractas
                 // Se repite código. Ver.
                 case ENacionalidad.Argentino:
                     rg = new Regex(patternDniArgentino);
-                    if (rg.IsMatch(dato))
+                    if (!(string.IsNullOrEmpty(dato)) && rg.IsMatch(dato))
                     {
                         valorRetorno = int.Parse(dato);
                     }
@@ -193,7 +193,7 @@ namespace EntidadesAbstractas
                     break;
                 case ENacionalidad.Extranjero:
                     rg = new Regex(patternDniExtranjero);
-                    if (rg.IsMatch(dato))
+                    if (!(string.IsNullOrEmpty(dato)) && rg.IsMatch(dato))
                     {
                         valorRetorno = int.Parse(dato);
                     }
@@ -221,7 +221,7 @@ namespace EntidadesAbstractas
             string patternName = @"^[A-Za-z][a-z]+$";
             Regex rg = new Regex(patternName);
 
-            if(rg.IsMatch(dato))
+            if(!(string.IsNullOrEmpty(dato)) && rg.IsMatch(dato))
             {
                 valorRetorno = dato;
             }
