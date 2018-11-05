@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
+using Excepciones;
 
 namespace Archivos
 {
@@ -23,9 +24,9 @@ namespace Archivos
                 writer.Close();
                 return true;
             }
-            catch(Exception)
+            catch(Exception e)
             {
-                return false;
+                throw new ArchivosExeption(e);
             }
         }
 
@@ -42,10 +43,10 @@ namespace Archivos
                 reader.Close();
                 return true;
             }
-            catch(Exception)
+            catch(Exception e)
             {
                 datos = default(T);
-                return false;
+                throw new ArchivosExeption(e);
             }
         }
     }

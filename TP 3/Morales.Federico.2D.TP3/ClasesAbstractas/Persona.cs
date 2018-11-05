@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Excepciones;
 
 //Clase Persona:
 // Abstracta, con los atributos Nombre, Apellido, Nacionalidad y DNI.
@@ -141,7 +142,7 @@ namespace ClasesAbstractas
                     }
                     else
                     {
-                        throw new Exception();
+                        throw new NacionalidadInvalidaExeption("Arg. Nacionalidad inválida.");
                     }
                     break;
                 case ENacionalidad.Extranjero:
@@ -151,7 +152,7 @@ namespace ClasesAbstractas
                     }
                     else
                     {
-                        throw new Exception();
+                        throw new NacionalidadInvalidaExeption("Ext. Nacionalidad inválida.");
                     }
                     break;
                 default:
@@ -186,7 +187,7 @@ namespace ClasesAbstractas
                     }
                     else
                     {
-                        throw new Exception();
+                        throw new DniInvalidoException("Arg. DNI inválido.");
                     }
                     break;
                 case ENacionalidad.Extranjero:
@@ -197,7 +198,7 @@ namespace ClasesAbstractas
                     }
                     else
                     {
-                        throw new Exception();
+                        throw new DniInvalidoException("Ext. DNI inválido.");
                     }
                     break;
                 default:

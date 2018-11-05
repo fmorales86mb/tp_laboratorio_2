@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Excepciones;
 
 //Clase Universidad:
 // Atributos Alumnos(lista de inscriptos), Profesores(lista de quienes pueden dar clases) y Jornadas.
@@ -230,7 +231,7 @@ namespace ClasesInstanciables
                 }
             }
 
-            throw new Exception();
+            throw new SinProfesorExeption();
         }
 
         /// <summary>
@@ -249,7 +250,7 @@ namespace ClasesInstanciables
                 }
             }
 
-            throw new Exception(); 
+            throw new SinProfesorExeption();
         }
 
         /// <summary>

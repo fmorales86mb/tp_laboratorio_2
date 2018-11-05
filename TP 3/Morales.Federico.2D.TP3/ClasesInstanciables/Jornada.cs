@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Excepciones;
 
 //Clase Jornada:
 // Atributos Profesor, Clase y Alumnos que toman dicha clase.
@@ -125,6 +126,8 @@ namespace ClasesInstanciables
         {
             if (j != a)
                 j.Alumnos.Add(a);
+            else
+                throw new AlumnoRepetidoException();
 
             return j;
         }

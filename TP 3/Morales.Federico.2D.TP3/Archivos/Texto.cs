@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Excepciones;
 
 //Archivos:
 // Generar una interfaz con las firmas para guardar y leer.
@@ -24,9 +25,9 @@ namespace Archivos
                 writer.Close();
                 return true;
             }
-            catch(Exception)
-            {                
-                return false;
+            catch(Exception e)
+            {
+                throw new ArchivosExeption(e);
             }            
         }
 
@@ -41,10 +42,10 @@ namespace Archivos
                 reader.Close();
                 return true;
             }
-            catch(Exception)
+            catch(Exception e)
             {
                 datos = string.Empty;
-                return false;
+                throw new ArchivosExeption(e);
             }
         }
     }
