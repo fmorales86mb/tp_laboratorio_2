@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Excepciones
 {
-    public class Class1
+    public class SinProfesorExeption : Exception
     {
+        public SinProfesorExeption()
+            :base("Sin Profesor.")
+        {            
+        }
     }
 }
