@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ClasesAbstractas;
+using EntidadesAbstractas;
 using ClasesInstanciables;
 
 //Clase Alumno:
@@ -27,14 +27,14 @@ namespace ClasesInstanciables
         {            
         }
 
-        public Alumno(int id, string nombre, string apellido, int dni, ENacionalidad nacionalidad, 
+        public Alumno(int id, string nombre, string apellido, string dni, ENacionalidad nacionalidad, 
             Universidad.EClases claseQueToma) 
             : base(id, nombre, apellido, dni, nacionalidad)
         {
             this.claseQueToma = claseQueToma;
         }
 
-        public Alumno(int id, string nombre, string apellido, int dni, ENacionalidad nacionalidad, 
+        public Alumno(int id, string nombre, string apellido, string dni, ENacionalidad nacionalidad, 
             Universidad.EClases claseQueToma, EEstadoCuenta estadoCuenta) 
             : this(id, nombre, apellido, dni, nacionalidad, claseQueToma)
         {
@@ -50,7 +50,17 @@ namespace ClasesInstanciables
         {
             StringBuilder sb = new StringBuilder(base.MostrarDatos());
 
-            sb.AppendLine(this.ToString());
+            sb.AppendLine();
+            if(this.estadoCuenta == EEstadoCuenta.AlDia)
+            {
+                sb.AppendLine("ESTADO DE CUENTA: Cuota al día");
+            }
+            else
+            {
+                sb.AppendLine("ESTADO DE CUENTA: " + this.estadoCuenta);
+            }
+            
+            sb.AppendLine(this.ParticiparEnClase());
 
             return sb.ToString();
         }
@@ -92,12 +102,7 @@ namespace ClasesInstanciables
         /// <returns></returns>
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-
-            sb.AppendLine("ESTADO DE CUENTA: " + this.estadoCuenta.ToString());
-            sb.AppendLine(this.ParticiparEnClase());
-
-            return sb.ToString();
+            return this.MostrarDatos();
         }
 
         public enum EEstadoCuenta

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Excepciones
 {
-    public class ArchivosExeption : Exception
+    public class ArchivosException : Exception
     {
-        public ArchivosExeption(Exception innerException) 
+        public ArchivosException(Exception innerException) 
             : base("Error en la gestión del Archivo.", innerException)
         {
         }

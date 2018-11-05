@@ -103,7 +103,7 @@ namespace ClasesInstanciables
         public static bool Guardar (Universidad uni)
         {
             Xml<Universidad> serializador = new Xml<Universidad>();
-            return serializador.Guardar("archivoUni", uni);
+            return serializador.Guardar("Universidad.xml", uni);
         }
 
         /// <summary>
@@ -127,18 +127,18 @@ namespace ClasesInstanciables
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach(Profesor p in uni.Profesores)
-            {
-                sb.AppendLine(p.ToString());
-            }
-            foreach(Alumno a in uni.Alumnos)
-            {
-                sb.AppendLine(a.ToString());
-            }
-            foreach(Jornada j in uni.Jornadas)
+            foreach (Jornada j in uni.Jornadas)
             {
                 sb.AppendLine(j.ToString());
             }
+            //foreach (Profesor p in uni.Profesores)
+            //{
+            //    sb.AppendLine(p.ToString());
+            //}
+            //foreach(Alumno a in uni.Alumnos)
+            //{
+            //    sb.AppendLine(a.ToString());
+            //}
 
             return sb.ToString();
         }
@@ -189,6 +189,8 @@ namespace ClasesInstanciables
         {
             if (u != a)
                 u.Alumnos.Add(a);
+            else
+                throw new AlumnoRepetidoException();
 
             return u;
         }
@@ -251,7 +253,7 @@ namespace ClasesInstanciables
                 }
             }
 
-            throw new SinProfesorExeption();
+            throw new SinProfesorException();
         }
 
         /// <summary>
@@ -270,7 +272,7 @@ namespace ClasesInstanciables
                 }
             }
 
-            throw new SinProfesorExeption();
+            throw new SinProfesorException();
         }
 
         /// <summary>

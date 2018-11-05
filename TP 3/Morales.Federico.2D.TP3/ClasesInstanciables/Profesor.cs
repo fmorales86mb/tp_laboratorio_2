@@ -1,4 +1,4 @@
-﻿using ClasesAbstractas;
+﻿using EntidadesAbstractas;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -34,7 +34,7 @@ namespace ClasesInstanciables
             
         }
 
-        public Profesor(int id, string nombre, string apellido, int dni, ENacionalidad nacionalidad)
+        public Profesor(int id, string nombre, string apellido, string dni, ENacionalidad nacionalidad)
             : base(id, nombre, apellido, dni, nacionalidad)
         {
             this.clasesDelDia = new Queue<Universidad.EClases>();
@@ -61,14 +61,7 @@ namespace ClasesInstanciables
         /// <returns></returns>
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-            
-            foreach(Universidad.EClases c in this.clasesDelDia)
-            {
-                sb.AppendLine(c.ToString());
-            }
-
-            return sb.ToString();
+            return this.MostrarDatos();
         }
 
         /// <summary>
@@ -79,7 +72,7 @@ namespace ClasesInstanciables
         {
             StringBuilder sb = new StringBuilder(base.MostrarDatos());
 
-            sb.AppendLine(this.ToString());
+            sb.AppendLine(this.ParticiparEnClase());
 
             return sb.ToString();
         }
@@ -93,7 +86,10 @@ namespace ClasesInstanciables
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("CLASES DEL DÍA:");
-            sb.AppendLine(this.ToString());
+            foreach (Universidad.EClases c in this.clasesDelDia)
+            {
+                sb.AppendLine(c.ToString());
+            }
 
             return sb.ToString();
         }

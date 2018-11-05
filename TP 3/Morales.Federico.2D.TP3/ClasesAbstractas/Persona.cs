@@ -16,7 +16,7 @@ using Excepciones;
 // Validará que los nombres sean cadenas con caracteres válidos para nombres.Caso contrario, no se cargará.
 // ToString retornará los datos de la Persona.
 
-namespace ClasesAbstractas
+namespace EntidadesAbstractas
 {
     public abstract class Persona
     {
@@ -117,7 +117,8 @@ namespace ClasesAbstractas
             sb.AppendFormat("NOMBRE COMPLETO: {0}, {1}", this.Apellido, this.Nombre);
             sb.AppendLine();
             sb.AppendFormat("NACIONALIDAD: {0}", this.Nacionalidad.ToString());
-            
+            sb.AppendLine();
+
             return sb.ToString();
         }
 
@@ -142,7 +143,7 @@ namespace ClasesAbstractas
                     }
                     else
                     {
-                        throw new NacionalidadInvalidaExeption("Arg. Nacionalidad inválida.");
+                        throw new NacionalidadInvalidaException();
                     }
                     break;
                 case ENacionalidad.Extranjero:
@@ -152,7 +153,7 @@ namespace ClasesAbstractas
                     }
                     else
                     {
-                        throw new NacionalidadInvalidaExeption("Ext. Nacionalidad inválida.");
+                        throw new NacionalidadInvalidaException();
                     }
                     break;
                 default:
@@ -187,7 +188,7 @@ namespace ClasesAbstractas
                     }
                     else
                     {
-                        throw new DniInvalidoException("Arg. DNI inválido.");
+                        throw new DniInvalidoException();
                     }
                     break;
                 case ENacionalidad.Extranjero:
@@ -198,7 +199,7 @@ namespace ClasesAbstractas
                     }
                     else
                     {
-                        throw new DniInvalidoException("Ext. DNI inválido.");
+                        throw new DniInvalidoException();
                     }
                     break;
                 default:

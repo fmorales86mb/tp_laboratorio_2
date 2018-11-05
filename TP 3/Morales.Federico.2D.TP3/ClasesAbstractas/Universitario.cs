@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 // Ver Equals    
 
-namespace ClasesAbstractas
+namespace EntidadesAbstractas
 {
     public abstract class Universitario : Persona
     {
@@ -24,7 +24,7 @@ namespace ClasesAbstractas
         {
         }
 
-        public Universitario(int legajo, string nombre, string apellido, int dni, ENacionalidad nacionalidad) 
+        public Universitario(int legajo, string nombre, string apellido, string dni, ENacionalidad nacionalidad) 
             : base(nombre, apellido, dni, nacionalidad)
         {
             this.legajo = legajo;
@@ -38,8 +38,8 @@ namespace ClasesAbstractas
         protected virtual string MostrarDatos()
         {
             StringBuilder sb = new StringBuilder(base.ToString());
-
-            sb.AppendLine("LEGAJO NÚMERO: " + this.legajo.ToString());
+            sb.AppendLine();
+            sb.AppendLine("LEGAJO NÚMERO: " + this.legajo.ToString());           
 
             return sb.ToString();
         }
@@ -70,14 +70,13 @@ namespace ClasesAbstractas
         }
 
         /// <summary>
-        /// 
+        /// Evalua que los objetos sean del mismo tipo.
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
         public override bool Equals(object obj)
-        {
-            return this.Equals(obj);
-            //return base.Equals(obj);
+        {            
+            return (this.GetType() == obj.GetType());                        
         }
     }
 }

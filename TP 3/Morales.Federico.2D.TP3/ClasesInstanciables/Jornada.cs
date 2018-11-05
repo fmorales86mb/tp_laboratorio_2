@@ -84,7 +84,7 @@ namespace ClasesInstanciables
         public static bool Guardar(Jornada jornada)
         {
             Texto writer = new Texto();
-            return writer.Guardar("archivoJornada.txt", jornada.ToString());
+            return writer.Guardar("Jornada.txt", jornada.ToString());
         }
 
         /// <summary>
@@ -114,6 +114,7 @@ namespace ClasesInstanciables
             {
                 sb.AppendLine(a.ToString());
             }
+            sb.AppendLine("<----------------------------------------------->");
 
             return sb.ToString();
         }

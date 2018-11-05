@@ -11,12 +11,12 @@ namespace Excepciones
         private string mensajeBase;
 
         public DniInvalidoException() 
-            : base("DNI Inválido.")
+            : base("La nacionalidad no se condice con el número de DNI")
         {
         }
 
         public DniInvalidoException(Exception e)
-            : base("DNI Inválido.", e)
+            : base("La nacionalidad no se condice con el número de DNI", e)
         {            
         }
 

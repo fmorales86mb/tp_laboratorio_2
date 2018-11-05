@@ -26,7 +26,7 @@ namespace Archivos
             }
             catch(Exception e)
             {
-                throw new ArchivosExeption(e);
+                throw new ArchivosException(e);
             }
         }
 
@@ -46,7 +46,7 @@ namespace Archivos
             catch(Exception e)
             {
                 datos = default(T);
-                throw new ArchivosExeption(e);
+                throw new ArchivosException(e);
             }
         }
     }
