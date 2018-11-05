@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using Excepciones;
-
-//Archivos:
-// Generar una interfaz con las firmas para guardar y leer.
-// Implementar la interfaz en las clases Xml y Texto, a fin de poder guardar y leer archivos de esos tipos.
 
 namespace Archivos
 {

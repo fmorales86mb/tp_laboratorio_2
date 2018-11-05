@@ -1,12 +1,6 @@
-﻿using System;
-using ClasesInstanciables;
+﻿using ClasesInstanciables;
 using Excepciones;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-//Test Unitarios:
-//a.Generar al menos dos test unitario que validen Excepciones
-//b.Generar al menos uno que valide un valor numérico
-//c.Generar al menos uno que valide que no haya valores nulos en algún atributo de las clases dadas.
 
 namespace UnitTest
 {
