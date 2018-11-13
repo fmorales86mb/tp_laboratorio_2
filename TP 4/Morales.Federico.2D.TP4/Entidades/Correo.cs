@@ -23,15 +23,12 @@ namespace Entidades
     public class Correo : IMostrar<List<Paquete>>
     {
         // Propiedades
-        public List<Paquete> Paquetes
-        {
-            get;
-            set;
-        }
+        public List<Paquete> Paquetes { get; set; }
 
         // Constructores
         public Correo()
         {
+            this.Paquetes = new List<Paquete>();
         }
 
         // Métodos
@@ -40,14 +37,51 @@ namespace Entidades
 
         }
 
+        /// <summary>
+        /// Retorna un String con los datos de la lista de Paquetes.
+        /// </summary>
+        /// <param name="elementos"></param>
+        /// <returns>Lista de paquetes.</returns>
         public string MostrarDatos(IMostrar<List<Paquete>> elementos)
         {
-            return "";
+            List<Paquete> lista = (List<Paquete>)((Correo)elementos).Paquetes;
+
+            StringBuilder sb = new StringBuilder();
+            
+            foreach(Paquete p in lista)
+            {
+                sb.AppendLine(p.ToString());
+            }
+
+            return sb.ToString();
         }
 
         // Sobreescritos
+        
+        
+        
+         
         public static Correo operator +(Correo c, Paquete p)
         {
+            //a.Controlar si el paquete ya está en la lista.En el caso de que esté, se lanzará la excepción
+            //  TrackingIdRepetidoException.
+            foreach (Paquete paquete in c.Paquetes)
+            {
+                if (paquete == p)
+                {
+                    throw new TrackingIdRepetidoExeption("El Paquete ya se encuentra en la lista.");
+                }
+            }
+
+            //b.Agregar el paquete a la lista de paquetes.
+            c.Paquetes.Add(p);
+
+            //c.Crear un hilo para el método MockCicloDeVida del paquete, y agregar dicho hilo a mockPaquetes.
+            Thread hilo = new Thread(p.MockCicloDeVida);
+
+            //d.Ejecutar el hilo.
+            hilo.Start();
+
             return c;
         }
     }

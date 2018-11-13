@@ -15,13 +15,44 @@ namespace Entidades
 {
     public static class PaqueteDAO
     {
+        private static string StrConection;          
+        private static SqlConnection Con;
+
+        /// <summary>
+        /// Se encarga de guardar los datos de un Paquete en la base de datos.
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns>True si guardó correctamente, caso contrario retorna False.</returns>
         public static bool Insertar(Paquete p)
         {
-            return true;
+            bool insertado = false;
+            string query = string.Format("insert into dbo.Paquetes values('{0}', {1}, 'MoralesFederico')",
+                p.DireccionEntrega, p.TrackingId);
+
+            SqlCommand command = new SqlCommand(query, Con);
+            
+            try
+            {
+                Con.Open();
+                if (command.ExecuteNonQuery() > 0)
+                    insertado = true;
+                Con.Close();
+            }
+            catch(Exception e)
+            {
+                if (Con.State != System.Data.ConnectionState.Closed)
+                    Con.Close();
+
+                return false;
+            }
+           
+            return insertado;
         }
 
         static PaqueteDAO()
-        { }
-
+        {
+            StrConection = "Data Source=[SQLEXPRESS];Initial Catalog=[correo-sp-2017];Integrated Security=True";
+            Con = = new SqlConnection(StrConection);
+        }
     }
 }
