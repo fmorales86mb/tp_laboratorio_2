@@ -20,10 +20,45 @@ namespace Entidades
 {
     public class Paquete : IMostrar<Paquete>
     {
+        // Atributos
+        private string direccionEntrega;
+        private EEstado estado;
+        private string trackingID;
+
         // Propiedades
-        public string DireccionEntrega { get; set; }
-        public EEstado Estado { get; set; }
-        public string TrackingId { get; set; }
+        public string DireccionEntrega
+        {
+            get
+            {
+                return this.direccionEntrega;
+            }
+            set
+            {
+                this.direccionEntrega = value;
+            }
+        }
+        public EEstado Estado
+        {
+            get
+            {
+                return this.estado;
+            }
+            set
+            {
+                this.estado = value;
+            }
+        }
+        public string TrackingId
+        {
+            get
+            {
+                return this.trackingID;
+            }
+            set
+            {
+                this.trackingID = value;
+            }
+        }
         
         // Constructores
         public Paquete(string direccionEntrega, string trackingID)

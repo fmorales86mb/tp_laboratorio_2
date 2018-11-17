@@ -22,6 +22,10 @@ namespace Entidades
 {
     public class Correo : IMostrar<List<Paquete>>
     {
+        // Atributos
+        private List<Thread> mockPaquetes;
+        private List<Paquete> paquetes;
+
         // Propiedades
         public List<Paquete> Paquetes { get; set; }
 
