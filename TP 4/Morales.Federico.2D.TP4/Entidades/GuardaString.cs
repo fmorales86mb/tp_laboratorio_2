@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,27 @@ namespace Entidades
     {
         public static bool Guardar(this string texto, string archivo)
         {
-            return true;
+            bool guardado = true;
+            StreamWriter writer = null;
+
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            path += @"\" + archivo;                            
+
+            try
+            {
+                writer = File.CreateText(path);
+                writer.Write(texto);                
+            }
+            catch
+            {
+                guardado = false;
+            }
+            finally
+            {
+                writer.Close();
+            }           
+
+            return guardado;
         }
     }
 }

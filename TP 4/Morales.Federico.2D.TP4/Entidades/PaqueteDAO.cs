@@ -26,7 +26,7 @@ namespace Entidades
         public static bool Insertar(Paquete p)
         {
             bool insertado = false;
-            string query = string.Format("insert into dbo.Paquetes values('{0}', {1}, 'MoralesFederico')",
+            string query = string.Format("insert into dbo.Paquetes values('{0}', '{1}', 'MoralesFederico')",
                 p.DireccionEntrega, p.TrackingId);
 
             SqlCommand command = new SqlCommand(query, Con);
@@ -35,15 +35,16 @@ namespace Entidades
             {
                 Con.Open();
                 if (command.ExecuteNonQuery() > 0)
-                    insertado = true;
-                Con.Close();
+                    insertado = true;                
             }
-            catch(Exception e)
+            catch
+            {                
+                insertado = false;
+            }
+            finally
             {
                 if (Con.State != System.Data.ConnectionState.Closed)
                     Con.Close();
-
-                return false;
             }
            
             return insertado;
@@ -51,7 +52,7 @@ namespace Entidades
 
         static PaqueteDAO()
         {
-            StrConection = "Data Source=SQLEXPRESS;Initial Catalog=correo-sp-2017;Integrated Security=True";
+            StrConection = @"Data Source=.\SQLEXPRESS;Initial Catalog=correo-sp-2017;Integrated Security=True";
             Con = new SqlConnection(StrConection);
         }
     }

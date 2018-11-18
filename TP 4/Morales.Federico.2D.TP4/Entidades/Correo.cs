@@ -62,7 +62,8 @@ namespace Entidades
             
             foreach(Paquete p in lista)
             {
-                sb.AppendLine(p.ToString());
+                sb.AppendLine();
+                sb.AppendFormat("{0} ({1})", p.ToString(), p.Estado.ToString());                
             }
 
             return sb.ToString();
@@ -71,25 +72,29 @@ namespace Entidades
         // Sobreescritos
         public static Correo operator +(Correo c, Paquete p)
         {
+            bool repetido = false;
             //a.Controlar si el paquete ya está en la lista.En el caso de que esté, se lanzará la excepción
             //  TrackingIdRepetidoException.
             foreach (Paquete paquete in c.Paquetes)
             {
                 if (paquete == p)
                 {
+                    repetido = true;
                     throw new TrackingIdRepetidoExeption("El Paquete ya se encuentra en la lista.");
                 }
             }
+            if (!repetido)
+            {
+                //b.Agregar el paquete a la lista de paquetes.
+                c.Paquetes.Add(p);
 
-            //b.Agregar el paquete a la lista de paquetes.
-            c.Paquetes.Add(p);
+                //c.Crear un hilo para el método MockCicloDeVida del paquete, y agregar dicho hilo a mockPaquetes.
+                Thread hilo = new Thread(p.MockCicloDeVida);
+                c.mockPaquetes.Add(hilo);
 
-            //c.Crear un hilo para el método MockCicloDeVida del paquete, y agregar dicho hilo a mockPaquetes.
-            Thread hilo = new Thread(p.MockCicloDeVida);
-            c.mockPaquetes.Add(hilo);
-
-            //d.Ejecutar el hilo.
-            hilo.Start();
+                //d.Ejecutar el hilo.
+                hilo.Start();
+            }
 
             return c;
         }

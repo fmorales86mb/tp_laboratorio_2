@@ -13,17 +13,14 @@ namespace MainCorreo
 {
     public partial class FrmPpal : Form
     {
-        Correo correo;
+        Correo correo;        
 
         public FrmPpal()
         {
             InitializeComponent();
-            correo = new Correo();
+            correo = new Correo();            
         }
-// El evento click del botón btnAgregar realizará las siguientes acciones en el siguiente orden:
-// a.Creará un nuevo paquete y asociará al evento InformaEstado el método paq_InformaEstado.
-// b.Agregará el paquete al correo, controlando las excepciones que puedan derivar de dicha acción.
-// c.Llamará al método ActualizarEstados.
+
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             Paquete p = new Paquete(txtDireccion.Text, mtxtTrackingID.Text);
@@ -42,7 +39,16 @@ namespace MainCorreo
 
         private void btnMostrarTodos_Click(object sender, EventArgs e)
         {
+            this.MostrarInformacion<List<Paquete>>((IMostrar<List<Paquete>>)correo);
+        }
 
+        private void MostrarInformacion<T>(IMostrar<T> elemento)
+        {
+            if (!(elemento is null))
+            {
+                rtbMostrar.Text = elemento.MostrarDatos(elemento);
+                elemento.MostrarDatos(elemento).Guardar("salida.txt");
+            }
         }
 
         private void paq_InformaEstado(object sender, EventArgs e)
@@ -53,19 +59,44 @@ namespace MainCorreo
                 this.Invoke(d, new object[] { sender, e });
             }
             else
-            { // Llamar al método 
+            { 
                 this.ActualizarEstados();
             }
         }
 
         private void ActualizarEstados()
         {
+            lstEstadoEntregado.Items.Clear();
+            lstEstadoEnViaje.Items.Clear();
+            lstEstadoIngresado.Items.Clear();
 
+            foreach(Paquete p in correo.Paquetes)
+            {
+                switch(p.Estado)
+                {
+                    case Paquete.EEstado.Ingresado:
+                        lstEstadoIngresado.Items.Add(p);
+                        break;
+                    case Paquete.EEstado.EnViaje:
+                        lstEstadoEnViaje.Items.Add(p);
+                        break;
+                    case Paquete.EEstado.Entregado:
+                        lstEstadoEntregado.Items.Add(p);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
-        private void FrmPpal_FormClosed(object sender, FormClosedEventArgs e)
+        private void FrmPpal_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.correo.FinEntregas();
         }
+
+        private void mostrarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MostrarInformacion<Paquete>((IMostrar<Paquete>)lstEstadoEntregado.SelectedItem);
+        }  
     }
 }
