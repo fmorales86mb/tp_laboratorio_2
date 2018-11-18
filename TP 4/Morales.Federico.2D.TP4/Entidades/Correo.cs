@@ -33,12 +33,20 @@ namespace Entidades
         public Correo()
         {
             this.Paquetes = new List<Paquete>();
+            this.mockPaquetes = new List<Thread>();
         }
 
         // Métodos
+        /// <summary>
+        /// Cierra todos los hilos activos.
+        /// </summary>
         public void FinEntregas()
         {
-
+            foreach(Thread t in this.mockPaquetes)
+            {
+                if(t.ThreadState == ThreadState.Running)                
+                    t.Abort();                
+            }
         }
 
         /// <summary>
