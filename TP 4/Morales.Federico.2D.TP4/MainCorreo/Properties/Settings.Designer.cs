@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FrmPpal.Properties
+namespace MainCorreo.Properties
 {
 
 

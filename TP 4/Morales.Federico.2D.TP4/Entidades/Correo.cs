@@ -61,10 +61,6 @@ namespace Entidades
         }
 
         // Sobreescritos
-        
-        
-        
-         
         public static Correo operator +(Correo c, Paquete p)
         {
             //a.Controlar si el paquete ya está en la lista.En el caso de que esté, se lanzará la excepción
@@ -82,6 +78,7 @@ namespace Entidades
 
             //c.Crear un hilo para el método MockCicloDeVida del paquete, y agregar dicho hilo a mockPaquetes.
             Thread hilo = new Thread(p.MockCicloDeVida);
+            c.mockPaquetes.Add(hilo);
 
             //d.Ejecutar el hilo.
             hilo.Start();

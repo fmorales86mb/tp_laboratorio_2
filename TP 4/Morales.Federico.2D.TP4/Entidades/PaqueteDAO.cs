@@ -51,8 +51,8 @@ namespace Entidades
 
         static PaqueteDAO()
         {
-            StrConection = "Data Source=[SQLEXPRESS];Initial Catalog=[correo-sp-2017];Integrated Security=True";
-            Con = = new SqlConnection(StrConection);
+            StrConection = "Data Source=SQLEXPRESS;Initial Catalog=correo-sp-2017;Integrated Security=True";
+            Con = new SqlConnection(StrConection);
         }
     }
 }

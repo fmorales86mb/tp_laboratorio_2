@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B25EF1F1-382D-4321-9732-437357BACB09}</ProjectGuid>
+    <ProjectGuid>{2B10F851-F9C7-46E6-A083-1818C955617D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>FrmPpal</RootNamespace>
-    <AssemblyName>FrmPpal</AssemblyName>
+    <RootNamespace>MainCorreo</RootNamespace>
+    <AssemblyName>MainCorreo</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
