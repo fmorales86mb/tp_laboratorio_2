@@ -25,6 +25,7 @@ namespace MainCorreo
         {
             Paquete p = new Paquete(txtDireccion.Text, mtxtTrackingID.Text);
             p.InformarEstado += this.paq_InformaEstado;
+            p.InformarExcepcion += this.MostrarDaoExeption;
 
             try
             {
@@ -102,5 +103,14 @@ namespace MainCorreo
         {
             this.MostrarInformacion<Paquete>((IMostrar<Paquete>)lstEstadoEntregado.SelectedItem);
         }  
+
+        /// <summary>
+        /// Se ejecuta en caso de que se genere una exception al intentar guardar un paquete en la DB.
+        /// </summary>
+        /// <param name="e"></param>
+        private void MostrarDaoExeption (Exception e)
+        {
+            MessageBox.Show(e.Message);
+        }
     }
 }

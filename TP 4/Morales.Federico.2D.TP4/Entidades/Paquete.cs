@@ -87,15 +87,15 @@ namespace Entidades
             }
 
             //e.Finalmente guardar los datos del paquete en la base de datos.
-            PaqueteDAO.Insertar(this);
-            //try
-            //{
-            //    PaqueteDAO.Insertar(this);
-            //}
-            //catch (Exception e)
-            //{
-            //    throw e;
-            //}
+            //PaqueteDAO.Insertar(this);
+            try
+            {
+                PaqueteDAO.Insertar(this);
+            }
+            catch (Exception e)
+            {
+                this.InformarExcepcion.Invoke(e);
+            }
         }        
 
         public string MostrarDatos(IMostrar<Paquete> elemento)
@@ -133,9 +133,11 @@ namespace Entidades
 
         // Evento
         public event DelegadoEstado InformarEstado;
+        public event DelegadoDaoException InformarExcepcion;
 
         // Delegado
-        public delegate void DelegadoEstado(object sender, EventArgs e);           
+        public delegate void DelegadoEstado(object sender, EventArgs e);
+        public delegate void DelegadoDaoException(Exception e);
 
         // Enumerable
         public enum EEstado

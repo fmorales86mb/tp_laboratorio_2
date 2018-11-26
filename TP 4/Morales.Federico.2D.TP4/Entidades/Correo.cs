@@ -94,10 +94,10 @@ namespace Entidades
                 {
                     hilo = new Thread(p.MockCicloDeVida);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
 
-                    throw;
+                    throw e;
                 }
                 c.mockPaquetes.Add(hilo);
 
