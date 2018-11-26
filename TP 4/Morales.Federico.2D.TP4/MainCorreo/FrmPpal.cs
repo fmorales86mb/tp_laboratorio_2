@@ -34,7 +34,11 @@ namespace MainCorreo
             catch(TrackingIdRepetidoExeption ex)
             {
                 MessageBox.Show(ex.Message);
-            }            
+            } 
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnMostrarTodos_Click(object sender, EventArgs e)

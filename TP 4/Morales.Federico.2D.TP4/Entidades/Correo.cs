@@ -89,7 +89,16 @@ namespace Entidades
                 c.Paquetes.Add(p);
 
                 //c.Crear un hilo para el método MockCicloDeVida del paquete, y agregar dicho hilo a mockPaquetes.
-                Thread hilo = new Thread(p.MockCicloDeVida);
+                Thread hilo = null;
+                try
+                {
+                    hilo = new Thread(p.MockCicloDeVida);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
                 c.mockPaquetes.Add(hilo);
 
                 //d.Ejecutar el hilo.

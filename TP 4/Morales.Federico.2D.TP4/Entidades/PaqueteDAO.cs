@@ -15,7 +15,7 @@ namespace Entidades
 {
     public static class PaqueteDAO
     {
-        private static string StrConection;          
+        private static SqlCommand comando;     
         private static SqlConnection Con;
 
         /// <summary>
@@ -29,17 +29,18 @@ namespace Entidades
             string query = string.Format("insert into dbo.Paquetes values('{0}', '{1}', 'MoralesFederico')",
                 p.DireccionEntrega, p.TrackingId);
 
-            SqlCommand command = new SqlCommand(query, Con);
+            comando = new SqlCommand(query, Con);
             
             try
             {
                 Con.Open();
-                if (command.ExecuteNonQuery() > 0)
+                if (comando.ExecuteNonQuery() > 0)
                     insertado = true;                
             }
-            catch
-            {                
-                insertado = false;
+            catch (Exception e)
+            {
+                throw e;
+                //insertado = false;
             }
             finally
             {
@@ -52,8 +53,9 @@ namespace Entidades
 
         static PaqueteDAO()
         {
-            StrConection = @"Data Source=.\SQLEXPRESS;Initial Catalog=correo-sp-2017;Integrated Security=True";
+            string StrConection = @"Data Source=.\SQLEXPRESS;Initial Catalog=correo-sp-2017;Integrated Security=True";
             Con = new SqlConnection(StrConection);
+            comando = null;
         }
     }
 }

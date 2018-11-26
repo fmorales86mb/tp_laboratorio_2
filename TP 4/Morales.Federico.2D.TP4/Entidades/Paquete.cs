@@ -78,7 +78,7 @@ namespace Entidades
             while (this.Estado != EEstado.Entregado)
             {
                 //a.Colocar una demora de 10 segundos.
-                Thread.Sleep(10000);
+                Thread.Sleep(4000);
                 //b.Pasar al siguiente estado.
                 if (this.Estado < EEstado.Entregado)
                     this.Estado += 1;
@@ -88,6 +88,14 @@ namespace Entidades
 
             //e.Finalmente guardar los datos del paquete en la base de datos.
             PaqueteDAO.Insertar(this);
+            //try
+            //{
+            //    PaqueteDAO.Insertar(this);
+            //}
+            //catch (Exception e)
+            //{
+            //    throw e;
+            //}
         }        
 
         public string MostrarDatos(IMostrar<Paquete> elemento)
