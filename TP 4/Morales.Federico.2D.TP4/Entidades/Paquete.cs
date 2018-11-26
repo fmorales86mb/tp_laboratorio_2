@@ -89,16 +89,14 @@ namespace Entidades
         }
 
         /// <summary>
-        /// Compara la igualdad de dos Paquetes por sus Propiedades.
+        /// Compara la igualdad de dos Paquetes por su TrackingId.
         /// </summary>
         /// <param name="p1"></param>
         /// <param name="p2"></param>
         /// <returns></returns>
         public static bool operator ==(Paquete p1, Paquete p2)
         {
-            return (p1.Estado == p2.Estado && 
-                p1.DireccionEntrega == p1.DireccionEntrega && 
-                p1.TrackingId == p2.TrackingId);
+            return (p1.TrackingId == p2.TrackingId);
         }
 
         public static bool operator !=(Paquete p1, Paquete p2)
