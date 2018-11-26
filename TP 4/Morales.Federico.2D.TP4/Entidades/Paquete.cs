@@ -1,31 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-
-//Paquete
-//1. Implementar la interfaz IMostrar, siendo su tipo genérico Paquete. 
-//2. MostrarDatos utilizará 
-//  string.Format con el siguiente formato "{0} para {1}", p.trackingID, p.direccionEntrega.
-//3. MockCicloDeVida hará que el paquete cambie de estado de la siguiente forma:
-//a.Colocar una demora de 10 segundos.
-//b.Pasar al siguiente estado.
-//c.Informar el estado a través de InformarEstado.EventArgs no tendrá ningún dato extra.
-//d.Repetir las acciones desde el punto A hasta que el estado sea Entregado.
-//e.Finalmente guardar los datos del paquete en la base de datos.
 
 namespace Entidades
 {
     public class Paquete : IMostrar<Paquete>
-    {
-        // Atributos
+    {        
         private string direccionEntrega;
         private EEstado estado;
         private string trackingID;
 
-        // Propiedades
         public string DireccionEntrega
         {
             get
@@ -60,7 +43,6 @@ namespace Entidades
             }
         }
         
-        // Constructores
         public Paquete(string direccionEntrega, string trackingID)
         {
             this.Estado = EEstado.Ingresado;
@@ -68,26 +50,19 @@ namespace Entidades
             this.TrackingId = trackingID;
         }
 
-        // Métodos
         /// <summary>
         /// Cambia el estado del paquete hasta que su estado sea Entregado. Luego lo guarda en la DB.
         /// </summary>
         public void MockCicloDeVida()
-        {
-            //d.Repetir las acciones desde el punto A hasta que el estado sea Entregado.
+        {            
             while (this.Estado != EEstado.Entregado)
-            {
-                //a.Colocar una demora de 10 segundos.
-                Thread.Sleep(4000);
-                //b.Pasar al siguiente estado.
+            {                
+                Thread.Sleep(4000);                
                 if (this.Estado < EEstado.Entregado)
-                    this.Estado += 1;
-                //c.Informar el estado a través de InformarEstado.EventArgs no tendrá ningún dato extra.
+                    this.Estado += 1;                
                 this.InformarEstado.Invoke(this.Estado, null);
             }
 
-            //e.Finalmente guardar los datos del paquete en la base de datos.
-            //PaqueteDAO.Insertar(this);
             try
             {
                 PaqueteDAO.Insertar(this);
@@ -130,16 +105,13 @@ namespace Entidades
         {
             return !(p1 == p2);
         }
-
-        // Evento
+        
         public event DelegadoEstado InformarEstado;
         public event DelegadoDaoException InformarExcepcion;
-
-        // Delegado
+        
         public delegate void DelegadoEstado(object sender, EventArgs e);
         public delegate void DelegadoDaoException(Exception e);
-
-        // Enumerable
+        
         public enum EEstado
         {
             Ingresado,
